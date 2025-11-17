@@ -42,7 +42,8 @@ public class BookServiceImpl implements BookService {
     public BookResponse addBook(BookRequest bookRequest) {
         Book book = modelMapper.map(bookRequest, Book.class);
         book.setIsbn(generateIsbn());
-        BookResponse bookResponse = modelMapper.map(book, BookResponse.class);
+        Book savedBook = bookRepository.save(book);
+        BookResponse bookResponse = modelMapper.map(savedBook, BookResponse.class);
         return bookResponse;
 //        return modelMapper.map(bookResponse, BookResponse.class);
     }
