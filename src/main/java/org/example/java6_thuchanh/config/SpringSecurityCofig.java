@@ -3,8 +3,8 @@ package org.example.java6_thuchanh.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +15,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableMethodSecurity
 public class SpringSecurityCofig {
 
 
@@ -29,15 +30,15 @@ public class SpringSecurityCofig {
         // be khoa, cho phep CRUD
         http.csrf(csrsConfigurer -> csrsConfigurer.disable())
                 .authorizeHttpRequests(authorrize -> {
-                    authorrize.requestMatchers(HttpMethod.POST, "/api/todos/**").hasRole("ADMIN"); // them - admin
-                    authorrize.requestMatchers(HttpMethod.PUT, "/api/todos/**").hasRole("ADMIN"); // sua - admin
-                    authorrize.requestMatchers(HttpMethod.DELETE, "/api/todos/**").hasRole("ADMIN"); // xoa - admin
-
-
-                    authorrize.requestMatchers(HttpMethod.GET, "/api/todos/**").hasAnyRole("ADMIN", "USER"); // get all
-
-                    // for coding, testing
-                    authorrize.requestMatchers(HttpMethod.GET, "api/books").permitAll(); // khong phan quyen
+//                    authorrize.requestMatchers(HttpMethod.POST, "/api/todos/**").hasRole("ADMIN"); // them - admin
+//                    authorrize.requestMatchers(HttpMethod.PUT, "/api/todos/**").hasRole("ADMIN"); // sua - admin
+//                    authorrize.requestMatchers(HttpMethod.DELETE, "/api/todos/**").hasRole("ADMIN"); // xoa - admin
+//
+//
+//                    authorrize.requestMatchers(HttpMethod.GET, "/api/todos/**").hasAnyRole("ADMIN", "USER"); // get all
+//
+//                    // for coding, testing
+//                    authorrize.requestMatchers(HttpMethod.GET, "api/books").permitAll(); // khong phan quyen
 
                     authorrize.anyRequest().authenticated();
                 })
