@@ -22,7 +22,7 @@ public class TodoController {
     private final TodoService todoService;
 
 //    get All
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping
     public ResponseEntity<List<Todo>> findAll() {
 
@@ -41,7 +41,7 @@ public class TodoController {
     }
 
 //    get by ID
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("{id}")
     public ResponseEntity<Todo> findById(@PathVariable Long id) {
 
@@ -49,21 +49,21 @@ public class TodoController {
         return new ResponseEntity<>(todo, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Todo> add(@Valid @RequestBody Todo todo) {
         Todo savedTodo = todoService.add(todo);
         return new ResponseEntity<>(savedTodo, HttpStatus.CREATED);
 
     }
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("{id}")
     public ResponseEntity<Todo> update(@Valid @RequestBody Todo todo, @PathVariable Long id) {
         Todo updatedTodo = todoService.update(todo, id);
         return new ResponseEntity<>(updatedTodo, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<Todo> delete(@PathVariable Long id) {
         Todo deleted = todoService.delete(id);
